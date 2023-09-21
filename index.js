@@ -1,4 +1,4 @@
-const sunglassesOptions = {
+let sunglassesOptions = {
     models: [
         {
             name: "aviator",
@@ -6,19 +6,19 @@ const sunglassesOptions = {
             thumbImg: "thumb-aviator.png",
             cssClass: "frame-aviator",
         },
-        {
+        {      
             name: "half-frame",
             price: 200,
             thumbImg: "thumb-half-frame.png",
             cssClass: "frame-half",
         },
         {
-            name: "round",
+            name: "round",  
             price: 250,
             thumbImg: "thumb-round.png",
             cssClass: "frame-round",
         },
-        {
+        {  
             name: "wayfarer",
             price: 250,
             thumbImg: "thumb-wayfarer.png",
@@ -62,30 +62,32 @@ const sunglassesOptions = {
 let sunglasses = {
     model: {
         name: "aviator",
-       mPrice: 300,
+        price: 300,
         thumbImg: "./images/thumb-aviator.png",
         cssClass: "frame-aviator",
     },
     lenses: {
-        lColor: "sepia",
-        lPrice: 20,
+        color: "sepia",
+        price: 20,
         cssClass: "color-sepia",
     },
     frame: {
-        fColor: "charcoal",
-        fPrice: 0,
+        color: "charcoal",
+        price: 0,
         cssClass: "color-charcoal",
-    }
+    }     
 }
 
-// destructure sunglasses Object...
-let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglasses
 
 
 const productDetailsEl = document.getElementById("productDetails")
 const productImage = document.getElementById("productImage")
 const productFrames = document.getElementsByClassName("product-image_frame")[0]
 const productLenses = document.getElementsByClassName("product-image_lenses")[0]
+const pdH1 = document.querySelector('.pdHalf')
+const pdLenses = document.querySelector('.pdLenses')
+const pdFrames = document.querySelector('.pdFrames')
+const pdPrice = document.querySelector('.pdPrice')
 
 let sunglassesNew = ''
 
@@ -94,9 +96,8 @@ function setSunglasses(sunglassesNew = sunglasses) {
 }
 
 function render(sunglassesNew) {
-
-
-    var sunglassesNew = {
+    
+    sunglassesNew = {
         model: {
             name: sunglassesNew.model.name,
             mPrice: sunglassesNew.model.price,
@@ -104,7 +105,7 @@ function render(sunglassesNew) {
             cssClass: sunglassesNew.model.cssClass,
         },
         lenses: {
-            color: sunglassesNew.lenses.color,
+            lColor: sunglassesNew.lenses.color,
             lPrice: sunglassesNew.lenses.price,
             cssClass: sunglassesNew.lenses.cssClass,
         },
@@ -112,35 +113,34 @@ function render(sunglassesNew) {
             fColor: sunglassesNew.frame.color,
             fPrice: sunglassesNew.frame.price,
             cssClass: sunglassesNew.frame.cssClass,
-        }
+        }     
     }
-    // destructured sunglassesNew objects..
-    let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglassesNew
+let {frame: {fColor}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice}, model: {name}, lenses: {lColor}} = sunglassesNew
+
+    let price = "$" + (mPrice + lPrice + fPrice)
 
 
-    let price = (mPrice + lPrice + fPrice)
-
-    productDetailsEl.textContent = `
+    pdH1.textContent = `
     ${name}
-    Custom: ${color} lenses,
-    ${fColor} frames
-    $${price}
     `
+    pdLenses.textContent = `
+    ${lColor} colored lenses
+    `
+    pdFrames.textContent = `
+    ${fColor} colored Frames
+    `
+    pdPrice.textContent = price
 
-                                            // refactored bottom commented out code into template literals..
-                                            // "<h1>" + sunglassesNew.model.name + "</h1>" +
-                                            // "<p>Custom: "  + sunglassesNew.lenses.color + " lenses, " + sunglassesNew.frame.color + " frames</p>" +
-                                            // "<p>" + price + "</p>"
-
-    let currClass = productImage.classList[1]
+    
+    const currClass = productImage.classList[1]
     productImage.classList.replace(currClass, sunglassesNew.model.cssClass)
-
-    let currFramesClass = productFrames.classList[1]
+    
+    const currFramesClass = productFrames.classList[1]
     productFrames.classList.replace(currFramesClass, sunglassesNew.frame.cssClass)
-
-    let currLensesClass = productLenses.classList[1]
+    
+    const currLensesClass = productLenses.classList[1]
     productLenses.classList.replace(currLensesClass, sunglassesNew.lenses.cssClass)
-
+    
 }
 
 //Highlight current selection
@@ -148,42 +148,42 @@ function addHighlight(clickedItem) {
     if (clickedItem.classList.contains("product-thumb")) {
         Array.from(document.getElementsByClassName("product-thumb"))
             .forEach(function(thumb) {
-               thumb.classList.remove("selected")
-            })
+               thumb.classList.remove("selected") 
+            }) 
     } else if (clickedItem.classList.contains("product-color-swatch")) {
-        var siblings = clickedItem.closest("ul").querySelectorAll("button")
+        let siblings = clickedItem.closest("ul").querySelectorAll("button")
         Array.from(siblings)
             .forEach(function(swatch) {
-               swatch.classList.remove("selected")
+               swatch.classList.remove("selected") 
             })
     }
-    clickedItem.classList.add("selected")
+    clickedItem.classList.add("selected") 
 }
 
 
-const bodyEl = document.body.addEventListener("click", function(event) {
-    let clickedItem = event.target
-    //if sunglassesNew defined take variable from updates
+document.body.addEventListener("click", function(event) {
+    var clickedItem = event.target
+    //if sunglassesNew defined take variable from updates 
         //else use original sunglasses object
     if (!sunglassesNew) {
         sunglassesNew = sunglasses
     }
-
+    
     // update model
     if (clickedItem.classList.contains("product-thumb")) {
 
-        let currName = clickedItem.dataset.name
+        var currName = clickedItem.dataset.name
 
-        let modelOptions = sunglassesOptions.models
+        var modelOptions = sunglassesOptions.models
         .filter(function(item) {
             return item.name === currName
         })[0]
-
-        let name = modelOptions.name
-        let price = modelOptions.price
-        let thumbImg = modelOptions.thumbImg
-        let cssClass = modelOptions.cssClass
-
+        
+        var name = modelOptions.name
+        var price = modelOptions.price
+        var thumbImg = modelOptions.thumbImg
+        var cssClass = modelOptions.cssClass
+        
         sunglassesNew = {
             model: {
                 name: name,
@@ -200,30 +200,30 @@ const bodyEl = document.body.addEventListener("click", function(event) {
                 color: sunglassesNew.frame.color,
                 price: sunglassesNew.frame.price,
                 cssClass: sunglassesNew.frame.cssClass,
-            }
+            }     
         }
-
+       
         addHighlight(clickedItem)
         setSunglasses(sunglassesNew)
         render(sunglassesNew)
     }
-
+    
     // update colors for frames / lenses
     if (clickedItem.classList.contains("product-color-swatch")) {
         var currColor = clickedItem.dataset.color
-
+        
         // check nearest parent div
             //lenses
         if (clickedItem.closest("div").classList[0] === "product-lenses") {
-            const colorOptions = sunglassesOptions.lenses
+            var colorOptions = sunglassesOptions.lenses
             .filter(function(item) {
                 return item.color === currColor
             })[0]
-
-            const color = colorOptions.color
-            const price = colorOptions.price
-            const cssClass = colorOptions.cssClass
-
+            
+            var color = colorOptions.color
+            var price = colorOptions.price
+            var cssClass = colorOptions.cssClass
+        
             sunglassesNew = {
                 model: {
                     name: sunglassesNew.model.name,
@@ -240,21 +240,21 @@ const bodyEl = document.body.addEventListener("click", function(event) {
                     color: sunglassesNew.frame.color,
                     price: sunglassesNew.frame.price,
                     cssClass: sunglassesNew.frame.cssClass,
-                }
+                }     
             }
-        }
-
+        } 
+        
         //frames
         else {
-            let colorOptions = sunglassesOptions.frames
+            var colorOptions = sunglassesOptions.frames
             .filter(function(item) {
                 return item.color === currColor
             })[0]
-
-            let color = colorOptions.color
-            let price = colorOptions.price
-            let cssClass = colorOptions.cssClass
-
+            
+            var color = colorOptions.color
+            var price = colorOptions.price
+            var cssClass = colorOptions.cssClass
+            
             sunglassesNew = {
                 model: {
                     name: sunglassesNew.model.name,
@@ -271,7 +271,7 @@ const bodyEl = document.body.addEventListener("click", function(event) {
                     color: color,
                     price: price,
                     cssClass: cssClass,
-                }
+                }     
             }
         }
 
