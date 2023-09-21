@@ -96,28 +96,31 @@ function render(sunglassesNew) {
     var sunglassesNew = {
         model: {
             name: sunglassesNew.model.name,
-            price: sunglassesNew.model.price,
+            mPrice: sunglassesNew.model.price,
             thumbImg: sunglassesNew.model.thumbImg,
             cssClass: sunglassesNew.model.cssClass,
         },
         lenses: {
             color: sunglassesNew.lenses.color,
-            price: sunglassesNew.lenses.price,
+            lPrice: sunglassesNew.lenses.price,
             cssClass: sunglassesNew.lenses.cssClass,
         },
         frame: {
-            color: sunglassesNew.frame.color,
-            price: sunglassesNew.frame.price,
+            fColor: sunglassesNew.frame.color,
+            fPrice: sunglassesNew.frame.price,
             cssClass: sunglassesNew.frame.cssClass,
         }
     }
-    let price = "$" + (sunglassesNew.model.price + sunglassesNew.lenses.price + sunglassesNew.frame.price)
+    // destructured sunglassesNew objects..
+let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglassesNew
+
+    let price = "$" + (mPrice + lPrice + fPrice)
 
 
     productDetailsEl.textContent = `
-    ${sunglassesNew.model.name}
-    Custom: ${sunglassesNew.lenses.color} lenses,
-    ${sunglassesNew.frame.color} frames
+    ${name}
+    Custom: ${color} lenses,
+    ${fColor} frames
     ${price}
     `
 
@@ -142,27 +145,27 @@ function addHighlight(clickedItem) {
     if (clickedItem.classList.contains("product-thumb")) {
         Array.from(document.getElementsByClassName("product-thumb"))
             .forEach(function(thumb) {
-               thumb.classList.remove("selected") 
-            }) 
+               thumb.classList.remove("selected")
+            })
     } else if (clickedItem.classList.contains("product-color-swatch")) {
         var siblings = clickedItem.closest("ul").querySelectorAll("button")
         Array.from(siblings)
             .forEach(function(swatch) {
-               swatch.classList.remove("selected") 
+               swatch.classList.remove("selected")
             })
     }
-    clickedItem.classList.add("selected") 
+    clickedItem.classList.add("selected")
 }
 
 
-document.body.addEventListener("click", function(event) {
+const bodyEl = document.body.addEventListener("click", function(event) {
     var clickedItem = event.target
-    //if sunglassesNew defined take variable from updates 
+    //if sunglassesNew defined take variable from updates
         //else use original sunglasses object
     if (!sunglassesNew) {
         sunglassesNew = sunglasses
     }
-    
+
     // update model
     if (clickedItem.classList.contains("product-thumb")) {
 
@@ -172,12 +175,12 @@ document.body.addEventListener("click", function(event) {
         .filter(function(item) {
             return item.name === currName
         })[0]
-        
+
         var name = modelOptions.name
         var price = modelOptions.price
         var thumbImg = modelOptions.thumbImg
         var cssClass = modelOptions.cssClass
-        
+
         sunglassesNew = {
             model: {
                 name: name,
@@ -194,18 +197,18 @@ document.body.addEventListener("click", function(event) {
                 color: sunglassesNew.frame.color,
                 price: sunglassesNew.frame.price,
                 cssClass: sunglassesNew.frame.cssClass,
-            }     
+            }
         }
-       
+
         addHighlight(clickedItem)
         setSunglasses(sunglassesNew)
         render(sunglassesNew)
     }
-    
+
     // update colors for frames / lenses
     if (clickedItem.classList.contains("product-color-swatch")) {
         var currColor = clickedItem.dataset.color
-        
+
         // check nearest parent div
             //lenses
         if (clickedItem.closest("div").classList[0] === "product-lenses") {
@@ -213,11 +216,11 @@ document.body.addEventListener("click", function(event) {
             .filter(function(item) {
                 return item.color === currColor
             })[0]
-            
+
             var color = colorOptions.color
             var price = colorOptions.price
             var cssClass = colorOptions.cssClass
-        
+
             sunglassesNew = {
                 model: {
                     name: sunglassesNew.model.name,
@@ -234,21 +237,21 @@ document.body.addEventListener("click", function(event) {
                     color: sunglassesNew.frame.color,
                     price: sunglassesNew.frame.price,
                     cssClass: sunglassesNew.frame.cssClass,
-                }     
+                }
             }
-        } 
-        
+        }
+
         //frames
         else {
             var colorOptions = sunglassesOptions.frames
             .filter(function(item) {
                 return item.color === currColor
             })[0]
-            
+
             var color = colorOptions.color
             var price = colorOptions.price
             var cssClass = colorOptions.cssClass
-            
+
             sunglassesNew = {
                 model: {
                     name: sunglassesNew.model.name,
@@ -265,7 +268,7 @@ document.body.addEventListener("click", function(event) {
                     color: color,
                     price: price,
                     cssClass: cssClass,
-                }     
+                }
             }
         }
 
