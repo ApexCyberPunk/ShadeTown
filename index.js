@@ -1,4 +1,4 @@
-var sunglassesOptions = {
+const sunglassesOptions = {
     models: [
         {
             name: "aviator",

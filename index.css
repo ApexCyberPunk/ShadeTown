@@ -19,13 +19,13 @@ img {
 }
 
 
-html, 
+html,
 body {
     margin: 0;
     padding: 0;
     font-family: 'Sen', sans-serif;
     color: #181818;
-    background: #F5F5F5;
+    background: #7a0202;
     font-size: 16px;
 }
 
@@ -87,15 +87,16 @@ button:hover,
     display: flex;
     flex-direction: column;
     width: 100%;
-    background: #E1D4FF;
+    background: red;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 1em 0;
+    padding: 2em .25em;
+    border-radius: 1.5em;
 }
 
 .header .byline {
-    color: #14154F;
+    color: #f2f2fc;
     margin: 0;
     font-style: italic;
 }
@@ -110,9 +111,10 @@ button:hover,
 .footer {
     display: flex;
     margin: 0;
-    padding: 2em 1em 3em 1em;
-    background: #EAEAEA;
-    color: #9C9C9C; 
+    padding: 2em 1em;
+    background: #c90303;
+    color: #c49191;
+    border-radius: 100px;
 }
 .footer nav {
     display: flex;
@@ -128,7 +130,7 @@ button:hover,
 }
 
 .footer nav a:hover {
-    color: #14154F;
+    color: rgb(14, 29, 231);
 }
 
 /* Product */
