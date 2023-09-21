@@ -6,19 +6,19 @@ const sunglassesOptions = {
             thumbImg: "thumb-aviator.png",
             cssClass: "frame-aviator",
         },
-        {      
+        {
             name: "half-frame",
             price: 200,
             thumbImg: "thumb-half-frame.png",
             cssClass: "frame-half",
         },
         {
-            name: "round",  
+            name: "round",
             price: 250,
             thumbImg: "thumb-round.png",
             cssClass: "frame-round",
         },
-        {  
+        {
             name: "wayfarer",
             price: 250,
             thumbImg: "thumb-wayfarer.png",
@@ -59,7 +59,7 @@ const sunglassesOptions = {
     ],
 }
 
-var sunglasses = {
+const sunglasses = {
     model: {
         name: "aviator",
         price: 300,
@@ -75,7 +75,7 @@ var sunglasses = {
         color: "charcoal",
         price: 0,
         cssClass: "color-charcoal",
-    }     
+    }
 }
 
 
@@ -85,14 +85,14 @@ var productImage = document.getElementById("productImage")
 var productFrames = document.getElementsByClassName("product-image_frame")[0]
 var productLenses = document.getElementsByClassName("product-image_lenses")[0]
 
-var sunglassesNew = ''
+let sunglassesNew = ''
 
 function setSunglasses(sunglassesNew = sunglasses) {
     return sunglassesNew
 }
 
 function render(sunglassesNew) {
-    
+
     var sunglassesNew = {
         model: {
             name: sunglassesNew.model.name,
@@ -109,25 +109,32 @@ function render(sunglassesNew) {
             color: sunglassesNew.frame.color,
             price: sunglassesNew.frame.price,
             cssClass: sunglassesNew.frame.cssClass,
-        }     
+        }
     }
-    var price = "$" + (sunglassesNew.model.price + sunglassesNew.lenses.price + sunglassesNew.frame.price)
-    
-  
-    productDetailsEl.innerHTML = 
-    "<h1>" + sunglassesNew.model.name + "</h1>" +
-    "<p>Custom: "  + sunglassesNew.lenses.color + " lenses, " + sunglassesNew.frame.color + " frames</p>" +
-    "<p>" + price + "</p>"
-    
-    var currClass = productImage.classList[1]
+    let price = "$" + (sunglassesNew.model.price + sunglassesNew.lenses.price + sunglassesNew.frame.price)
+
+
+    productDetailsEl.textContent = `
+    ${sunglassesNew.model.name}
+    Custom: ${sunglassesNew.lenses.color} lenses,
+    ${sunglassesNew.frame.color} frames
+    ${price}
+    `
+
+                                            // refactored bottom commented out code into template literals..
+                                            // "<h1>" + sunglassesNew.model.name + "</h1>" +
+                                            // "<p>Custom: "  + sunglassesNew.lenses.color + " lenses, " + sunglassesNew.frame.color + " frames</p>" +
+                                            // "<p>" + price + "</p>"
+
+    let currClass = productImage.classList[1]
     productImage.classList.replace(currClass, sunglassesNew.model.cssClass)
-    
-    var currFramesClass = productFrames.classList[1]
+
+    let currFramesClass = productFrames.classList[1]
     productFrames.classList.replace(currFramesClass, sunglassesNew.frame.cssClass)
-    
-    var currLensesClass = productLenses.classList[1]
+
+    let currLensesClass = productLenses.classList[1]
     productLenses.classList.replace(currLensesClass, sunglassesNew.lenses.cssClass)
-    
+
 }
 
 //Highlight current selection
