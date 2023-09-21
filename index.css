@@ -48,11 +48,14 @@ h1 {
     text-underline-offset: 7px;
     text-decoration-thickness: 2px;
     margin-top: 0;
+    color: white;
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 1.8em;
     line-height: 1.5;
+    color: white;
+    font-weight: 800;
 }
 
 /* Interface elements */
@@ -125,7 +128,7 @@ button:hover,
 }
 
 .footer nav a {
-    color: #757272;   
+    color: #757272;
     text-decoration: none;
 }
 
@@ -138,16 +141,16 @@ button:hover,
     width: 100%;
     display: grid;
     gap: .5em 2em;
-    margin-bottom: 2em; 
+    margin-bottom: 2em;
     width: calc(100% - 10px);
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: min-content;
-    grid-template-areas: 
-    "details    details"            
-    "product    product"            
+    grid-template-areas:
+    "details    details"
+    "product    product"
     "choice     choice"
     "lenses     frames"
-    "buy        buy";    
+    "buy        buy";
 }
 
 .product-image {
@@ -163,15 +166,15 @@ button:hover,
     bottom: 0;
     left: 0;
     right: 0;
-    
+
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-  
+
     -webkit-mask-position: center;
     mask-position: center;
 
     -webkit-mask-size: 250%;
-    mask-size: 250%; 
+    mask-size: 250%;
 }
 
 .product-image_lenses {
@@ -180,15 +183,16 @@ button:hover,
     bottom: 0;
     left: 0;
     right: 0;
-    
+
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-  
+
     -webkit-mask-position: center;
     mask-position: center;
 
     -webkit-mask-size: 250%;
-    mask-size: 250%; 
+    mask-size: 250%;
+
 }
 
 .product ul {
@@ -218,7 +222,7 @@ button:hover,
     align-items: center;
     width: calc(100% -20px);
     position: relative;
-    z-index: 1; 
+    z-index: 1;
 }
 
 .product-style li {
@@ -235,7 +239,7 @@ button:hover,
     display: flex;
     gap: 10px;
     position: relative;
-    z-index: 1;   
+    z-index: 1;
 }
 
 .product-lenses {
