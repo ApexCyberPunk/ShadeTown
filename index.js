@@ -59,31 +59,33 @@ const sunglassesOptions = {
     ],
 }
 
-const sunglasses = {
+sunglasses = {
     model: {
         name: "aviator",
-        price: 300,
+       mPrice: 300,
         thumbImg: "./images/thumb-aviator.png",
         cssClass: "frame-aviator",
     },
     lenses: {
-        color: "sepia",
-        price: 20,
+        lColor: "sepia",
+        lPrice: 20,
         cssClass: "color-sepia",
     },
     frame: {
-        color: "charcoal",
-        price: 0,
+        fColor: "charcoal",
+        fPrice: 0,
         cssClass: "color-charcoal",
     }
 }
 
+// destructure sunglasses Object...
+let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglasses
 
 
-var productDetailsEl = document.getElementById("productDetails")
-var productImage = document.getElementById("productImage")
-var productFrames = document.getElementsByClassName("product-image_frame")[0]
-var productLenses = document.getElementsByClassName("product-image_lenses")[0]
+const productDetailsEl = document.getElementById("productDetails")
+const productImage = document.getElementById("productImage")
+const productFrames = document.getElementsByClassName("product-image_frame")[0]
+const productLenses = document.getElementsByClassName("product-image_lenses")[0]
 
 let sunglassesNew = ''
 
@@ -92,6 +94,7 @@ function setSunglasses(sunglassesNew = sunglasses) {
 }
 
 function render(sunglassesNew) {
+
 
     var sunglassesNew = {
         model: {
@@ -112,16 +115,16 @@ function render(sunglassesNew) {
         }
     }
     // destructured sunglassesNew objects..
-let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglassesNew
+    let {model : {name}, model: {mPrice}, lenses: {lPrice}, frame: {fPrice} ,lenses : {color}, frame : {fColor}} = sunglassesNew
 
-    let price = "$" + (mPrice + lPrice + fPrice)
 
+    let price = (mPrice + lPrice + fPrice)
 
     productDetailsEl.textContent = `
     ${name}
     Custom: ${color} lenses,
     ${fColor} frames
-    ${price}
+    $${price}
     `
 
                                             // refactored bottom commented out code into template literals..
@@ -159,7 +162,7 @@ function addHighlight(clickedItem) {
 
 
 const bodyEl = document.body.addEventListener("click", function(event) {
-    var clickedItem = event.target
+    let clickedItem = event.target
     //if sunglassesNew defined take variable from updates
         //else use original sunglasses object
     if (!sunglassesNew) {
@@ -169,17 +172,17 @@ const bodyEl = document.body.addEventListener("click", function(event) {
     // update model
     if (clickedItem.classList.contains("product-thumb")) {
 
-        var currName = clickedItem.dataset.name
+        let currName = clickedItem.dataset.name
 
-        var modelOptions = sunglassesOptions.models
+        let modelOptions = sunglassesOptions.models
         .filter(function(item) {
             return item.name === currName
         })[0]
 
-        var name = modelOptions.name
-        var price = modelOptions.price
-        var thumbImg = modelOptions.thumbImg
-        var cssClass = modelOptions.cssClass
+        let name = modelOptions.name
+        let price = modelOptions.price
+        let thumbImg = modelOptions.thumbImg
+        let cssClass = modelOptions.cssClass
 
         sunglassesNew = {
             model: {
@@ -212,14 +215,14 @@ const bodyEl = document.body.addEventListener("click", function(event) {
         // check nearest parent div
             //lenses
         if (clickedItem.closest("div").classList[0] === "product-lenses") {
-            var colorOptions = sunglassesOptions.lenses
+            const colorOptions = sunglassesOptions.lenses
             .filter(function(item) {
                 return item.color === currColor
             })[0]
 
-            var color = colorOptions.color
-            var price = colorOptions.price
-            var cssClass = colorOptions.cssClass
+            const color = colorOptions.color
+            const price = colorOptions.price
+            const cssClass = colorOptions.cssClass
 
             sunglassesNew = {
                 model: {
@@ -243,14 +246,14 @@ const bodyEl = document.body.addEventListener("click", function(event) {
 
         //frames
         else {
-            var colorOptions = sunglassesOptions.frames
+            let colorOptions = sunglassesOptions.frames
             .filter(function(item) {
                 return item.color === currColor
             })[0]
 
-            var color = colorOptions.color
-            var price = colorOptions.price
-            var cssClass = colorOptions.cssClass
+            let color = colorOptions.color
+            let price = colorOptions.price
+            let cssClass = colorOptions.cssClass
 
             sunglassesNew = {
                 model: {
