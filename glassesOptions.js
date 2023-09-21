@@ -60,4 +60,6 @@ export let sunglassesOptions = {
     ],
 }
 
-console.log(...sunglassesOptions.models)
+console.log(sunglassesOptions.models)
+
+// let {} = [sunglassesOptions.models]
