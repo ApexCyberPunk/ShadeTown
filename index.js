@@ -5,8 +5,8 @@ import { sunglasses} from "./sunglasses.js"
 
 
 
-
-const productDetailsEl = document.getElementById("productDetails")
+// productDetailsElEMENT is never used... SO its commented out
+// const productDetailsEl = document.getElementById("productDetails")
 const productImage = document.getElementById("productImage")
 const productFrames = document.getElementsByClassName("product-image_frame")[0]
 const productLenses = document.getElementsByClassName("product-image_lenses")[0]
@@ -22,7 +22,7 @@ function setSunglasses(sunglassesNew = sunglasses) {
 }
 
 function render(sunglassesNew = sunglasses) {
-    
+
     sunglassesNew = {
         model: {
             name: sunglassesNew.model.name,
