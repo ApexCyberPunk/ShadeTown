@@ -59,7 +59,7 @@ const sunglassesOptions = {
     ],
 }
 
-sunglasses = {
+let sunglasses = {
     model: {
         name: "aviator",
        mPrice: 300,
